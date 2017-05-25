@@ -18,8 +18,8 @@ Return JSON:
 
 ```json
 {
-	http://google.com: {
-		google: 83
+	"http://google.com" : {
+		"google" : 83
 	}
 }
 ```
