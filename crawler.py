@@ -8,17 +8,21 @@ api = Api(app)
 parser = reqparse.RequestParser()
 parser.add_argument('url')
 parser.add_argument('word')
+parser.add_argument('ignorecase')
 
 # Função para abortar a Request feita
 def abort_if_invalid(url):
 	abort(404, message="The url {} is invalid".format(url))
 	
 # Função que faz um GET para a URL e retorna quantas vezes a palavra word aparece no conteudo
-def count_words_in(url, word):
+def count_words_in(url, word, ignore_case):
 	try:
 		r = requests.get(url)
 		data = str(r.text)
-		return data.count(word)
+		if (str(ignore_case).lower() == 'true'):
+			return data.lower().count(word.lower())
+		else:
+			return data.count(word)
 	except Exception:
 		abort_if_invalid(url)
 		
@@ -29,15 +33,16 @@ def validate_url(url):
 	return url
 	
 
-class UrlCrawler(Resource):
+class UrlCrawlerAPI(Resource):
 	def get(self):
 		args = parser.parse_args()
 		if (args['url'] == '' or args['word'] == ''):
 			abort(404, message="Please provide 'url' and 'word' arguments")
 		valid_url = validate_url(args['url'])
-		return { valid_url : { args['word'] : count_words_in(valid_url, args['word']) }}
+		return { valid_url : { args['word'] : count_words_in(valid_url, args['word'], args['ignorecase']) }}
+
 		
-api.add_resource(UrlCrawler, "/")
+api.add_resource(UrlCrawlerAPI, "/")
 
 if __name__ == '__main__':
 	app.run(debug=True)
