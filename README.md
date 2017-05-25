@@ -14,6 +14,16 @@ Example:
 
 `&ignorecase=true` pass this argument to match ignoring case
 
+Return JSON:
+
+```json
+{
+	http://google.com: {
+		google: 83
+	}
+}
+```
+
 ## Setup
 
 To test this script, you'll need [Python 3.x](https://www.python.org/downloads/) installed and [pip](https://pip.pypa.io/en/stable/installing/) to get the packages
