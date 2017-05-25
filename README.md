@@ -5,8 +5,13 @@ Web Crawler API to count how many times a word appear in a given URL
 
 This API will take a url and a word and count in the requested URL's HTML the number of matches (case sensitive)
 
+Example:
+`http://127.0.0.1:5000/?url=google.com&word=google&ignorecase=true`
+
 `?url=[url]` is the url to be requested
+
 `&word=[word]` is the word to be searched and counted
+
 `&ignorecase=true` pass this argument to match ignoring case
 
 ## Setup
