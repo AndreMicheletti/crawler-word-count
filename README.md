@@ -26,7 +26,7 @@ Return JSON:
 
 ## Setup
 
-To test this script, you'll need [Python 3.x](https://www.python.org/downloads/) installed and [pip](https://pip.pypa.io/en/stable/installing/) to get the packages
+To run this script, you'll need [Python 3.x](https://www.python.org/downloads/) installed and [pip](https://pip.pypa.io/en/stable/installing/) to get the packages
 
 Then you must get the extensions [Flask-restful](http://flask-restful-cn.readthedocs.io/en/0.3.5/installation.html) and [requests](http://docs.python-requests.org/en/master/user/install/)
 
@@ -46,3 +46,11 @@ Then all you need to do is request the service passing the arguments:
 - via Browser : you can do it on your browser, just type this in the address box = `http://127.0.0.1:5000/?url=google.com&word=google`
 
 - via cURL : open another terminal and type `curl http://127.0.0.1:5000/ -d "url=google.com" -d "word=google" -X GET` 
+
+## Testing
+
+The file `crawler_test.py` is a *test suit* that was created to be used with the library [pytest](https://docs.pytest.org/en/latest/getting-started.html) 
+
+Install [pytest](https://docs.pytest.org/en/latest/getting-started.html) by running in your terminal `pip install pytest`
+
+Then, on the root folder of this project, run the terminal command `pytest`. It will automatically look for and run tests files (that follow a naming convention)

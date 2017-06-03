@@ -12,7 +12,7 @@ parser.add_argument('ignorecase')
 
 # Função para abortar a Request feita
 def abort_if_invalid(url):
-	abort(404, message="The url {} is invalid".format(url))
+	abort(404)
 	
 # Função que faz um GET para a URL e retorna quantas vezes a palavra word aparece no conteudo
 def count_words_in(url, word, ignore_case):
@@ -36,8 +36,8 @@ def validate_url(url):
 class UrlCrawlerAPI(Resource):
 	def get(self):
 		args = parser.parse_args()
-		if (args['url'] == '' or args['word'] == ''):
-			abort(404, message="Please provide 'url' and 'word' arguments")
+		if (args['url'] == ''):
+			abort(404, message="Please provide 'url' argument")
 		valid_url = validate_url(args['url'])
 		return { valid_url : { args['word'] : count_words_in(valid_url, args['word'], args['ignorecase']) }}
 
