@@ -35,11 +35,16 @@ def validate_url(url):
 
 class UrlCrawlerAPI(Resource):
 	def get(self):
-		args = parser.parse_args()
-		if (args['url'] == ''):
-			abort(404, message="Please provide 'url' argument")
-		valid_url = validate_url(args['url'])
-		return { valid_url : { args['word'] : count_words_in(valid_url, args['word'], args['ignorecase']) }}
+		try:
+			args = parser.parse_args()
+			if (args['url'] == ''):
+				abort(404, message="Please provide 'url' argument")
+			valid_url = validate_url(args['url'])
+			return { valid_url : { args['word'] : count_words_in(valid_url, args['word'], args['ignorecase']) }}
+		except AttributeError:
+			return { 'message' : 'Please provide URL and WORD arguments' }
+		except Exception as e:
+			return { 'message' : 'Unhandled Exception: ' + str(e) }
 
 		
 api.add_resource(UrlCrawlerAPI, "/")
